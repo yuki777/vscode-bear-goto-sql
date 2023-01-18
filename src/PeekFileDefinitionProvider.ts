@@ -24,7 +24,7 @@ export default class PeekFileDefinitionProvider implements vscode.DefinitionProv
     const possibleFileNames: String[] = [];
 
     if (type === "@Named") {
-      const sqlFileBaseNames = resourceParts[2].split(",").map((x) => x.split("=")[1]);
+      const sqlFileBaseNames = resourceParts[3].split(",").map((x) => x.split("=")[1]);
       let file = "";
       sqlFileBaseNames.forEach((sqlFileBaseName) => {
         this.sqlPaths.forEach((sqlPath) => {

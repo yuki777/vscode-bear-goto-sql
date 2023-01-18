@@ -1,0 +1,91 @@
+{
+  "name": "vscode-bear-goto-sql",
+  "displayName": "vscode-bear-goto-sql",
+  "publisher": "YukiAdachi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yuki777/vscode-bear-goto-sql"
+  },
+  "description": "Jump to sql.",
+  "version": "0.1.0",
+  "engines": {
+    "node": "14.*",
+    "npm": "6.*",
+    "vscode": "^1.61.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:php"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [],
+    "configuration": {
+      "title": "vscode-bear-goto-sql extension configuration",
+      "properties": {
+        "vscode-bear-goto-sql.supportedLanguages": {
+          "type": "array",
+          "default": [
+            "php"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of vscode language names where the extension should be used."
+        },
+        "vscode-bear-goto-sql.targetFileExtensions": {
+          "type": "array",
+          "default": [
+            ".sql"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "list of extensions that should be tried for finding peeked files. These are tried in order as further extensions of the potential file name and also as alternative file endings instead of the existing file extension (if available)"
+        },
+        "vscode-bear-goto-sql.sqlPaths": {
+          "type": "array",
+          "default": [
+            "var/db/sql"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "Sql file path list to be searched."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "lint:fix": "eslint --fix src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.2.2",
+    "@types/node": "^14.17.27",
+    "@types/parse-path": "^4.0.1",
+    "@types/vscode": "^1.61.0",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
+    "eslint": "^7.27.0",
+    "glob": "^7.2.0",
+    "mocha": "^9.1.3",
+    "typescript": "^4.4.4",
+    "vsce": "^1.100.1",
+    "vscode-test": "^1.5.2"
+  },
+  "dependencies": {
+    "parse-path": "^4.0.3"
+  },
+  "volta": {
+    "node": "14.21.2"
+  }
+}

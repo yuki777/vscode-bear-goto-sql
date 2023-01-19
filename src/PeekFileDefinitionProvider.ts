@@ -14,6 +14,10 @@ export default class PeekFileDefinitionProvider implements vscode.DefinitionProv
       position,
       /((@Named|@Query|#\[DbQuery)\((id=|id:)?['"]([^'"]*?)['"])/,
     );
+    if (range === undefined) {
+      return [];
+    }
+
     const selectedText = document.getText(range);
     const resourceParts = selectedText.match(/(@Named|@Query|#\[DbQuery)\((id=|id:)?['"]([^'"]*?)['"]/);
     if (resourceParts === null) {

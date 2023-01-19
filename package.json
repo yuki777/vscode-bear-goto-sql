@@ -7,7 +7,7 @@
     "url": "https://github.com/yuki777/vscode-bear-goto-sql"
   },
   "description": "Jump to sql.",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "engines": {
     "node": "14.*",
     "npm": "6.*",

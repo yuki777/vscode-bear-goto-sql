@@ -3,6 +3,7 @@ import * as vscode from "vscode";
 export default class PeekFileDefinitionProvider implements vscode.DefinitionProvider {
   targetFileExtensions: string[] = [];
   sqlPaths: string[] = [];
+  public static readonly REGEX_PATTERN = /(@Named|@Query|#\[DbQuery)\((id=|id:)?\s*['"]([^'"]*?)['"]/;
 
   constructor(targetFileExtensions: string[] = [], sqlPaths: string[] = []) {
     this.targetFileExtensions = targetFileExtensions;
@@ -10,16 +11,13 @@ export default class PeekFileDefinitionProvider implements vscode.DefinitionProv
   }
 
   getResourceName(document: vscode.TextDocument, position: vscode.Position): String[] {
-    const range = document.getWordRangeAtPosition(
-      position,
-      /((@Named|@Query|#\[DbQuery)\((id=|id:)?['"]([^'"]*?)['"])/,
-    );
+    const range = document.getWordRangeAtPosition(position, PeekFileDefinitionProvider.REGEX_PATTERN);
     if (range === undefined) {
       return [];
     }
 
     const selectedText = document.getText(range);
-    const resourceParts = selectedText.match(/(@Named|@Query|#\[DbQuery)\((id=|id:)?['"]([^'"]*?)['"]/);
+    const resourceParts = selectedText.match(PeekFileDefinitionProvider.REGEX_PATTERN);
     if (resourceParts === null) {
       return [];
     }
